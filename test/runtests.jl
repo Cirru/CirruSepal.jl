@@ -1,5 +1,10 @@
 using CirruSepal
 using Base.Test
 
-# write your own tests here
-@test 1 == 1
+f = open("../examples/demo.cirru", "r")
+
+ast = CirruSepal.compile(readall(f))
+
+dump(ast)
+
+eval(ast)
