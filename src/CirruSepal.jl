@@ -2,7 +2,7 @@
 module CirruSepal
 
   using CirruParser
-  export compile
+  export compile, evaluateFile
 
   function transformProgram(ast)
     exprs = map(transform, ast)
@@ -34,6 +34,12 @@ module CirruSepal
   function compile(code)
     tree = CirruParser.pare(code, "")
     transformProgram(tree)
+  end
+
+  function evaluateFile(relativeName)
+    code = readall(open(relativeName))
+    ast = compile(code)
+    eval(ast)
   end
 
 end # module
